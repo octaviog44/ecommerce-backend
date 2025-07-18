@@ -1,12 +1,9 @@
 import { Router } from "express";
+import { searchProducts, getProduct } from "../controllers/productsController";
 
 const router = Router();
 
-router.get("/", (req, res) => {
-    res.json([
-        { id: 1, name: "Producto 1", price: 100 },
-        { id: 2, name: "Producto 2", price: 200 }
-    ]);
-});
+router.get("/search", searchProducts);
+router.get("/:id", getProduct);
 
 export default router;
