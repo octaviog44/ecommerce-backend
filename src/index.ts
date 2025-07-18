@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import productsRoutes from "./routes/products.js";
+
 
 dotenv.config();
 
@@ -11,6 +13,8 @@ app.use(cors());
 app.get("/", (req, res) => {
     res.send("Servidor funcionando con TypeScript 🚀");
 });
+
+app.use("/api/products", productsRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
