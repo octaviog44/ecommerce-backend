@@ -1,14 +1,14 @@
-import { Request, Response } from "express";
-import mercadopago from "mercadopago";
+import { MercadoPagoConfig } from "mercadopago";
 
-mercadopago.configure({
-    access_token: process.env.MP_ACCESS_TOKEN as string,
+const mp = new MercadoPagoConfig({
+    accessToken: process.env.ACCESS_TOKEN,
 });
 
-export const crearPreferencia = async (req: Request, res: Response) => {
+console.log("Métodos de mp:", Object.keys(mp));
+
+export const crearPreferencia = async (req, res) => {
     try {
         const { description, price, quantity } = req.body;
-
         const preference = {
             items: [
                 {
@@ -24,14 +24,13 @@ export const crearPreferencia = async (req: Request, res: Response) => {
             },
             auto_return: "approved",
         };
-
-        const response = await mercadopago.preferences.create(preference);
+        const response = await mp.preferences.create(preference);
         res.json({ id: response.body.id, init_point: response.body.init_point });
     } catch (error) {
         res.status(500).json({ error: "Error al crear la preferencia" });
     }
 };
 
-export const mercadopagoIPN = (req: Request, res: Response) => {
+export const mercadopagoIPN = (req, res) => {
     // ... validar pago, actualizar orden, enviar email, notificar internos
 };

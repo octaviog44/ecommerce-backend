@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { crearPreferencia } from "../controllers/mercadopagoController";
+import { crearPreferencia } from "../controllers/mercadopagoController.ts";
 
 const router = Router();
 

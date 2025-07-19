@@ -36,8 +36,8 @@ console.log("/auth configurado");
 // app.use("/orders", orderRoutes);
 // console.log("/orders configurado");
 
-// app.use("/mercadopago", mercadopagoRoutes);
-// console.log("/mercadopago configurado");
+app.use("/mercadopago", mercadopagoRoutes);
+console.log("/mercadopago configurado");
 
 app.get("/", (req, res) => {
     res.send("Servidor funcionando correctamente 🚀");
