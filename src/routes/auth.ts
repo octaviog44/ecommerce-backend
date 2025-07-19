@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { requestLoginCode, validateCode } from "../controllers/authController";
+import { requestLoginCode } from "../controllers/authController";
 
 const router = Router();
 
-router.post("/", requestLoginCode);
-router.post("/token", validateCode);
+// router.post("/", requestLoginCode);
+// router.post("/token", validateCode);
 
 export default router;

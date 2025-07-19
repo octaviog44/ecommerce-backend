@@ -1,62 +1,51 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import productsRoutes from "./routes/products.js";
-import authRoutes from "./routes/auth";
-import userRoutes from "./routes/users";
-import productRoutes from "./routes/products";
-import orderRoutes from "./routes/orders";
-import mercadopagoRoutes from "./routes/mercadopago"
-import mercadopago from 'mercadopago';
+import productsRoutes from "./routes/products.ts";
+console.log("productsRoutes importado");
+import authRoutes from "./routes/auth.ts";
+console.log("authRoutes importado");
+import userRoutes from "./routes/users.ts";
+console.log("userRoutes importado");
+import productRoutes from "./routes/products.ts";
+console.log("productRoutes importado");
+import orderRoutes from "./routes/orders.ts";
+console.log("orderRoutes importado");
+import mercadopagoRoutes from "./routes/mercadopago.ts";
+console.log("mercadopagoRoutes importado");
+
+console.log("Hola mundo desde index.ts");
 
 dotenv.config();
-const mercadopago = require("mercadopago");
-mercadopago.configure({
-    access_token: process.env.ACCESS_TOKEN,
-});
+console.log("dotenv configurado");
 
 const app = express();
-app.use("/auth", authRoutes);
-app.use("/", userRoutes);
-app.use("/products", productRoutes);
-app.use("/order", orderRoutes);
-app.use("/", mercadopagoRoutes);
-
-declare module 'mercadopago';
-
-
-
 app.use(express.json());
 app.use(cors());
+console.log("Express y middlewares configurados");
 
-const mp = new mercadopago(process.env.ACCESS_TOKEN as string);
+app.use("/auth", authRoutes);
+console.log("/auth configurado");
 
-const preference = {
-    items: [
-        {
-            title: "Mi producto",
-            quantity: 1,
-            unit_price: 100,
-        },
-    ],
-};
+// app.use("/products", productsRoutes);
+// console.log("/products configurado");
 
-mercadopago.preferences.create(preference)
-    .then(response => {
-        console.log(response);
-    })
-    .catch(error => {
-        console.error(error);
-    });
+// app.use("/users", userRoutes);
+// console.log("/users configurado");
 
+// app.use("/orders", orderRoutes);
+// console.log("/orders configurado");
+
+// app.use("/mercadopago", mercadopagoRoutes);
+// console.log("/mercadopago configurado");
 
 app.get("/", (req, res) => {
-    res.send("Servidor funcionando con TypeScript 🚀");
+    res.send("Servidor funcionando correctamente 🚀");
 });
-
-app.use("/api/products", productsRoutes);
+console.log("Endpoint raíz configurado");
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
+console.log("Listener configurado");
