@@ -1,13 +1,22 @@
 import { Router } from "express";
-import { authMiddleware } from "../middlewares/authMiddleware";
-import { getProfile, updateProfile, updateAddress } from "../controllers/userController";
+import { authMiddleware } from "../middlewares/authMiddleware.ts";
 
 const router = Router();
 
-router.use(authMiddleware);
+router.get("/me", authMiddleware, (req, res) => {
+    // @ts-ignore
+    res.json(req.user);
+});
 
-router.get("/me", getProfile);
-router.patch("/me", updateProfile);
-router.patch("/me/address", updateAddress);
+router.patch("/me", authMiddleware, (req, res) => {
+    // @ts-ignore
+    const user = req.user;
+    const updates = req.body;
+    // No permitir cambiar id ni email
+    delete updates.id;
+    delete updates.email;
+    Object.assign(user, updates);
+    res.json({ message: "Usuario actualizado", user });
+});
 
 export default router;

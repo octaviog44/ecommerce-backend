@@ -1,19 +1,21 @@
 
 import { Request, Response, NextFunction } from "express";
-import { users } from "../db/data";
+import jwt from "jsonwebtoken";
+import { users } from "../db/data.ts";
 
-export interface AuthRequest extends Request {
-    user?: any;
-}
-
-export const authMiddleware = (req: AuthRequest, res: Response, next: NextFunction) => {
+export function authMiddleware(req: Request, res: Response, next: NextFunction) {
     const authHeader = req.headers.authorization;
     if (!authHeader) return res.status(401).json({ error: "Token requerido" });
 
-    const token = authHeader.replace("Bearer ", "");
-    const user = users.find(u => u.token === token);
-    if (!user) return res.status(401).json({ error: "Token inválido" });
-
-    req.user = user;
-    next();
-};
+    const token = authHeader.split(" ")[1];
+    try {
+        const decoded: any = jwt.verify(token, process.env.JWT_SECRET || "secreto");
+        const user = users.find(u => u.id === decoded.userId);
+        if (!user) return res.status(401).json({ error: "Usuario no encontrado" });
+        // @ts-ignore
+        req.user = user;
+        next();
+    } catch (e) {
+        return res.status(401).json({ error: "Token inválido" });
+    }
+}

@@ -27,11 +27,11 @@ console.log("Express y middlewares configurados");
 app.use("/auth", authRoutes);
 console.log("/auth configurado");
 
-// app.use("/products", productsRoutes);
-// console.log("/products configurado");
+app.use("/products", productsRoutes);
+console.log("/products configurado");
 
-// app.use("/users", userRoutes);
-// console.log("/users configurado");
+app.use("/users", userRoutes);
+console.log("/users configurado");
 
 // app.use("/orders", orderRoutes);
 // console.log("/orders configurado");
