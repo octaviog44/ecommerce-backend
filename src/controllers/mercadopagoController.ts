@@ -1,10 +1,4 @@
-import { MercadoPagoConfig } from "mercadopago";
-
-const mp = new MercadoPagoConfig({
-    accessToken: process.env.ACCESS_TOKEN,
-});
-
-console.log("Métodos de mp:", Object.keys(mp));
+import axios from "axios";
 
 export const crearPreferencia = async (req, res) => {
     try {
@@ -24,8 +18,18 @@ export const crearPreferencia = async (req, res) => {
             },
             auto_return: "approved",
         };
-        const response = await mp.preferences.create(preference);
-        res.json({ id: response.body.id, init_point: response.body.init_point });
+
+        const response = await axios.post(
+            "https://api.mercadopago.com/checkout/preferences",
+            preference,
+            {
+                headers: {
+                    Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
+                },
+            }
+        );
+
+        res.json({ id: response.data.id, init_point: response.data.init_point });
     } catch (error) {
         res.status(500).json({ error: "Error al crear la preferencia" });
     }
