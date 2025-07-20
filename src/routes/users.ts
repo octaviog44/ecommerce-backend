@@ -19,4 +19,11 @@ router.patch("/me", authMiddleware, (req, res) => {
     res.json({ message: "Usuario actualizado", user });
 });
 
+router.patch("/me/address", authMiddleware, (req, res) => {
+    // @ts-ignore
+    const user = req.user;
+    user.address = req.body;
+    res.json({ message: "Dirección actualizada", address: user.address });
+});
+
 export default router;
