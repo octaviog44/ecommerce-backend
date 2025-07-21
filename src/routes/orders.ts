@@ -1,13 +1,10 @@
 import { Router } from "express";
-import { authMiddleware } from "../middlewares/authMiddleware";
-import { createOrder, getMyOrders, getOrderById } from "../controllers/ordersController";
+import { createOrder, getMyOrders } from "../controllers/ordersController.ts";
+import { authMiddleware } from "../middlewares/authMiddleware.ts";
 
 const router = Router();
 
-router.use(authMiddleware);
-
-router.post("/", createOrder);
-router.get("/me", getMyOrders);
-router.get("/:orderId", getOrderById);
+router.post("/", authMiddleware, createOrder);
+router.get("/me", authMiddleware, getMyOrders);
 
 export default router;

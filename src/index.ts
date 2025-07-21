@@ -33,8 +33,8 @@ console.log("/products configurado");
 app.use("/users", userRoutes);
 console.log("/users configurado");
 
-// app.use("/orders", orderRoutes);
-// console.log("/orders configurado");
+app.use("/orders", orderRoutes);
+console.log("/orders configurado");
 
 app.use("/mercadopago", mercadopagoRoutes);
 console.log("/mercadopago configurado");
