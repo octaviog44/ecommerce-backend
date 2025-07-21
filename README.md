@@ -42,7 +42,7 @@ Este proyecto es un backend para un e-commerce, desarrollado en Node.js + TypeSc
    npm run dev
    ```
 
-5.     Descarga la colección de Postman desde [aquí](./New-Collection.postman_collection.json)
+5.   Descarga la colección de Postman desde [aquí](./postman/New-Collection.postman_collection.json)
 ---
 
 ## 🛠️ Endpoints disponibles
