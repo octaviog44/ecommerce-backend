@@ -108,5 +108,4 @@ MIT
 
 ---
 
-¿Quieres que te ayude a armar la colección de Postman o necesitas ayuda con algún detalle específico del README?  
-¿Te gustaría que agregue ejemplos de requests y respuestas para cada endpoint?
+
