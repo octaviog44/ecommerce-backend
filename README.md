@@ -42,6 +42,8 @@ Este proyecto es un backend para un e-commerce, desarrollado en Node.js + TypeSc
    npm run dev
    ```
 
+5. **Descarga la collections de Postman**
+   https://web.postman.co/workspace/My-Workspace~2c95769e-baa0-430e-8f70-3f0bb1e622d7/request/35302173-fbe9cf27-69d2-41ae-95af-eccff1f55c3f?action=share&source=copy-link&creator=35302173
 ---
 
 ## 🛠️ Endpoints disponibles
