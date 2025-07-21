@@ -68,6 +68,12 @@ export const getMyOrders = (req: Request, res: Response) => {
     res.json({ orders: detailedOrders });
 };
 
-export const getOrderById = (req: any, res: Response) => {
-    // ... buscar orden por id y usuario, devolver detalle
+export const getOrderById = (req: Request, res: Response) => {
+    // @ts-ignore
+    const user = req.user;
+    const { orderId } = req.params;
+    const order = orders.find(o => o.id === orderId && o.userId === user.id);
+    if (!order) return res.status(404).json({ error: "Orden no encontrada" });
+    const product = products.find(p => p.id === order.productId) || null;
+    res.json({ ...order, product });
 };
