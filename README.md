@@ -1,4 +1,4 @@
-       # E-commerce Backend
+# E-commerce Backend
 
 Este proyecto es un backend para un e-commerce, desarrollado en Node.js + TypeScript. Incluye autenticación por email, gestión de usuarios y productos, órdenes de compra y pagos integrados con Mercado Pago.
 
